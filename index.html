@@ -1,0 +1,158 @@
+
+---
+
+#### **2. Adding More Interactivity with JavaScript**
+
+Let’s add two interactive features:
+1. **A Back-to-Top Button**: This button will appear when the user scrolls down and take them back to the top of the page when clicked.
+2. **Collapsible Boxes**: Allow users to collapse or expand each section for better readability.
+
+Here’s the updated code with these features:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dijkstra's Algorithm for Water Distribution - A Creative Web Presentation">
+    <title>Dijkstra's Algorithm - Water Flow Optimization</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f7f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .box {
+            width: 300px;
+            padding: 20px;
+            background: linear-gradient(145deg, #ffffff, #d9e4ec);
+            box-shadow: 5px 5px 15px #bababa, -5px -5px 15px #ffffff;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .box:hover {
+            transform: scale(1.05);
+        }
+
+        .box h2 {
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+
+        #backToTop {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Dijkstra's Algorithm for Water Distribution</h1>
+    </header>
+
+    <div class="container">
+        <div class="box" onclick="toggleContent(this)">
+            <h2>Problem Statement</h2>
+            <p>Efficiently routing water from a source to various destinations in an urban area to minimize cost, energy consumption, and water loss...</p>
+        </div>
+
+        <div class="box" onclick="toggleContent(this)">
+            <h2>Introduction</h2>
+            <p>Dijkstra's Algorithm is a graph-based algorithm used to find the shortest path in a weighted graph...</p>
+        </div>
+
+        <div class="box" onclick="toggleContent(this)">
+            <h2>Why Dijkstra?</h2>
+            <p>Dijkstra's algorithm guarantees the shortest path, is faster than Bellman-Ford...</p>
+        </div>
+
+        <div class="box" onclick="toggleContent(this)">
+            <h2>Key Inefficiencies</h2>
+            <p>Manual routing was error-prone and time-consuming. Greedy heuristics failed...</p>
+        </div>
+
+        <div class="box" onclick="toggleContent(this)">
+            <h2>How It Works</h2>
+            <p>1. Initialize source distance to 0, all others to infinity... <br>2. Find the node...</p>
+        </div>
+
+        <div class="box" onclick="toggleContent(this)">
+            <h2>Time & Space Complexity</h2>
+            <p>Time complexity: O((V + E) log V)<br>Space complexity: O(V + E)...</p>
+        </div>
+    </div>
+
+    <button id="backToTop" onclick="scrollToTop()">Back to Top</button>
+
+    <footer>
+        <p>&copy; 2025 Dijkstra's Algorithm Project | Water Distribution Optimization</p>
+    </footer>
+
+    <script>
+        // Back to Top Button
+        window.onscroll = function() {
+            const backToTop = document.getElementById('backToTop');
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                backToTop.style.display = 'block';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        };
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Collapsible Boxes
+        function toggleContent(box) {
+            const content = box.querySelector('p');
+            if (content.style.display === 'none' || content.style.display === '') {
+                content.style.display = 'block';
+            } else {
+                content.style.display = 'none';
+            }
+        }
+    </script>
+
+</body>
+</html>
