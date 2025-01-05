@@ -1,15 +1,3 @@
-
----
-
-#### **2. Adding More Interactivity with JavaScript**
-
-Let’s add two interactive features:
-1. **A Back-to-Top Button**: This button will appear when the user scrolls down and take them back to the top of the page when clicked.
-2. **Collapsible Boxes**: Allow users to collapse or expand each section for better readability.
-
-Here’s the updated code with these features:
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,26 +23,22 @@ Here’s the updated code with these features:
         }
 
         .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
+            max-width: 800px;
+            margin: 20px auto;
             padding: 20px;
         }
 
         .box {
-            width: 300px;
             padding: 20px;
             background: linear-gradient(145deg, #ffffff, #d9e4ec);
             box-shadow: 5px 5px 15px #bababa, -5px -5px 15px #ffffff;
             border-radius: 15px;
-            text-align: center;
+            margin-bottom: 20px;
             transition: transform 0.3s ease;
-            cursor: pointer;
         }
 
         .box:hover {
-            transform: scale(1.05);
+            transform: scale(1.02);
         }
 
         .box h2 {
@@ -91,34 +75,56 @@ Here’s the updated code with these features:
     </header>
 
     <div class="container">
-        <div class="box" onclick="toggleContent(this)">
+        <!-- Problem Statement Box -->
+        <div class="box">
             <h2>Problem Statement</h2>
-            <p>Efficiently routing water from a source to various destinations in an urban area to minimize cost, energy consumption, and water loss...</p>
+            <p>
+                Efficiently routing water from a source to various destinations in an urban area to minimize cost, energy consumption, and water loss. The goal is to determine the shortest path in a complex pipeline network, represented as a graph with nodes (junctions) and edges (pipelines with weights representing distance or cost).
+            </p>
         </div>
 
-        <div class="box" onclick="toggleContent(this)">
+        <!-- Introduction Box -->
+        <div class="box">
             <h2>Introduction</h2>
-            <p>Dijkstra's Algorithm is a graph-based algorithm used to find the shortest path in a weighted graph...</p>
+            <p>
+                Dijkstra's Algorithm is a graph-based algorithm used to find the shortest path from a source node to all other nodes in a weighted graph. It was proposed by Edsger W. Dijkstra in 1956 and has since been widely used in various applications such as GPS navigation, network routing, and urban planning.
+            </p>
         </div>
 
-        <div class="box" onclick="toggleContent(this)">
+        <!-- Why Dijkstra Box -->
+        <div class="box">
             <h2>Why Dijkstra?</h2>
-            <p>Dijkstra's algorithm guarantees the shortest path, is faster than Bellman-Ford...</p>
+            <p>
+                Dijkstra's algorithm guarantees the shortest path, is faster than Bellman-Ford for graphs without negative weights, and is simple to implement. It is widely used in GPS, networking, and water flow optimization. Compared to other algorithms like Bellman-Ford and Floyd-Warshall, it is more efficient for sparse graphs with non-negative edge weights.
+            </p>
         </div>
 
-        <div class="box" onclick="toggleContent(this)">
-            <h2>Key Inefficiencies</h2>
-            <p>Manual routing was error-prone and time-consuming. Greedy heuristics failed...</p>
+        <!-- Key Inefficiencies Box -->
+        <div class="box">
+            <h2>Key Inefficiencies in Previous Approaches</h2>
+            <p>
+                Manual routing methods were error-prone and time-consuming. Greedy heuristics often failed to provide optimal solutions, resulting in higher costs and increased water loss. Additionally, previous approaches lacked scalability, making them impractical for large urban networks.
+            </p>
         </div>
 
-        <div class="box" onclick="toggleContent(this)">
+        <!-- How it Works Box -->
+        <div class="box">
             <h2>How It Works</h2>
-            <p>1. Initialize source distance to 0, all others to infinity... <br>2. Find the node...</p>
+            <p>
+                1. **Initialization**: Set the distance of the source node to 0 and all other nodes to infinity.<br>
+                2. **Find Minimum Distance**: Select the node with the smallest distance that hasn't been processed yet.<br>
+                3. **Update Distances**: For each unvisited neighbor, calculate the new tentative distance (current distance + edge weight). If this distance is smaller, update it.<br>
+                4. **Repeat**: Continue the process until all nodes have been processed.
+            </p>
         </div>
 
-        <div class="box" onclick="toggleContent(this)">
+        <!-- Time & Space Complexity Box -->
+        <div class="box">
             <h2>Time & Space Complexity</h2>
-            <p>Time complexity: O((V + E) log V)<br>Space complexity: O(V + E)...</p>
+            <p>
+                - **Time Complexity**: O((V + E) log V), where V is the number of vertices and E is the number of edges. This complexity is achieved using a binary heap for the priority queue.<br>
+                - **Space Complexity**: O(V + E), as we need to store the graph (adjacency list) and the distance table.
+            </p>
         </div>
     </div>
 
@@ -142,17 +148,8 @@ Here’s the updated code with these features:
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-
-        // Collapsible Boxes
-        function toggleContent(box) {
-            const content = box.querySelector('p');
-            if (content.style.display === 'none' || content.style.display === '') {
-                content.style.display = 'block';
-            } else {
-                content.style.display = 'none';
-            }
-        }
     </script>
 
 </body>
 </html>
+
