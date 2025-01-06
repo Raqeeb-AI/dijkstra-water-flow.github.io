@@ -288,6 +288,9 @@
                 <li><strong>Iteration</strong>: Repeat steps 2-3 until all nodes are visited</li>
             </ol>
 
+            <h3>Comparison with Bellman-Ford</h3>
+<p>While the Bellman-Ford algorithm can handle graphs with negative edge weights, it has a higher time complexity of O(VE), making it less efficient for large graphs. Since water distribution networks do not involve negative edge weights, Dijkstra's algorithm is a more appropriate choice.</p>
+
             <h3>Time and Space Complexity</h3>
             <ul>
                 <li><strong>Time Complexity</strong>: O((V + E) log V), where V = number of junctions, E = number of pipes</li>
