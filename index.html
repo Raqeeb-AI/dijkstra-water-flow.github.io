@@ -298,6 +298,40 @@
             </ul>
         </section>
 
+        <section id="floyd-warshall">
+    <h2>Algorithm Chosen: Floyd-Warshall Algorithm</h2>
+    <p>
+        The Floyd-Warshall algorithm is used to find the shortest paths between all pairs of nodes in a weighted graph. It is particularly useful in scenarios where we need to analyze the shortest path between every possible pair of junctions in the water distribution network.
+    </p>
+
+    <h3>Why Floyd-Warshall?</h3>
+    <ul>
+        <li><strong>All-Pairs Shortest Path</strong>: Unlike Dijkstra, which finds the shortest path from a single source to all nodes, Floyd-Warshall finds paths between all pairs of nodes.</li>
+        <li><strong>Simplicity</strong>: The algorithm uses a dynamic programming approach, which is easy to implement.</li>
+        <li><strong>Versatility</strong>: Can handle both directed and undirected graphs.</li>
+    </ul>
+
+    <h3>Algorithm Steps</h3>
+    <ol>
+        <li>Initialize a distance matrix where <code>dist[i][j]</code> is the direct distance between nodes <code>i</code> and <code>j</code>. If no direct path exists, set it to infinity.</li>
+        <li>For each intermediate node <code>k</code>, update the distance matrix using the formula:</li>
+        <li><code>dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])</code>.</li>
+        <li>Repeat the process for all pairs of nodes.</li>
+    </ol>
+
+    <h3>Time and Space Complexity</h3>
+    <ul>
+        <li><strong>Time Complexity</strong>: O(V³), where V = number of nodes</li>
+        <li><strong>Space Complexity</strong>: O(V²), for storing the distance matrix</li>
+    </ul>
+
+    <h3>Comparison with Dijkstra’s Algorithm</h3>
+    <p>
+        While Dijkstra's algorithm is more efficient for single-source shortest path problems, Floyd-Warshall is better suited for solving all-pairs shortest path problems. Since the time complexity of Floyd-Warshall is O(V³), it is more computationally expensive for large graphs, but it provides a complete solution for all possible node pairs.
+    </p>
+</section>
+
+
         <section id="code">
             <h2>Code Implementation</h2>
             <pre><code>#include &lt;iostream&gt;
