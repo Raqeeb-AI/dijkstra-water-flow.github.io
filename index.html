@@ -3,149 +3,295 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Dijkstra's Algorithm for Water Distribution - A Creative Web Presentation">
-    <title>Dijkstra's Algorithm - Water Flow Optimization</title>
+    <title>Finding Shortest Path for Water Flow</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
             background-color: #000;
             color: #fff;
-        }
-
-        header {
-            background-color: #007bff;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-
-        nav {
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        nav button {
-            background: linear-gradient(145deg, #007bff, #005f99);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            margin: 0 10px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 16px;
-            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s, background-color 0.3s;
-        }
-
-        nav button:hover {
-            background-color: #00bfff;
-            transform: scale(1.1);
-        }
-
-        section {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
             line-height: 1.6;
         }
 
-        section h2 {
-            color: #00bfff;
+        /* Navbar Styles */
+        .navbar {
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.9);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
         }
 
-        footer {
-            background-color: #333;
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-circle {
+            background-color: #0095ff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
             color: white;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #0095ff;
+        }
+
+        .nav-links a.active {
+            color: #0095ff;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            padding-top: 100px;
+            min-height: 100vh;
+        }
+
+        .algorithm-title {
+            color: #0095ff;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
             text-align: center;
-            padding: 10px 0;
-            margin-top: 20px;
+        }
+
+        .main-heading {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .main-heading span {
+            color: #0095ff;
+        }
+
+        .subtitle {
+            color: #888;
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            text-align: center;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 2rem;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid #0095ff;
+            padding: 3px;
+            margin-bottom: 1rem;
+        }
+
+        .profile-name {
+            color: #0095ff;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-info {
+            color: #888;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Section Styles */
+        section {
+            display: none;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        section h2 {
+            color: #0095ff;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        section h3 {
+            color: #0095ff;
+            margin: 1.5rem 0 1rem;
+            font-size: 1.5rem;
+        }
+
+        section ul, section ol {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        section li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Code Section Styles */
+        pre {
+            background-color: #1a1a1a;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        code {
+            font-family: 'Consolas', 'Monaco', monospace;
+            color: #e6e6e6;
+        }
+
+        /* Paragraph Styles */
+        p {
+            margin-bottom: 1rem;
+        }
+
+        /* List Styles */
+        ul li, ol li {
+            color: #e6e6e6;
+        }
+
+        strong {
+            color: #0095ff;
         }
     </style>
 </head>
 <body>
-
-    <header>
-        <h1 style="font-family: 'Georgia', serif; font-weight: bold; text-align: center; color: #fff;">
-    <span style="font-size: 2.5em; display: block;">FINDING SHORTEST PATH</span>
-    <span style="font-size: 1.8em; display: block;">FOR WATER FLOW</span>
-</h1>
-    </header>
-
-    <nav>
-        <button onclick="showSection('problem')">Problem</button>
-        <button onclick="showSection('algorithm')">Algorithm</button>
-        <button onclick="showSection('code')">Code</button>
+    <nav class="navbar">
+        <div class="logo">
+            <div class="logo-circle">W</div>
+            <div class="logo-text">Water Flow Optimization</div>
+        </div>
+        <div class="nav-links">
+            <a href="#about" class="active">About Me</a>
+            <a href="#problem">Problem</a>
+            <a href="#algorithm">Algorithm</a>
+            <a href="#code">Code</a>
+        </div>
     </nav>
 
-    <section id="problem">
-        <h2>Problem Statement</h2>
-        <p>
-            Efficiently routing water from a source to various destinations in an urban area to minimize cost, energy consumption, and water loss. The goal is to determine the shortest path in a complex pipeline network, represented as a graph with nodes (junctions) and edges (pipelines with weights representing distance or cost).
-        </p>
-        <h3 style="color: #00bfff;">Why is it Important?</h3>
-        <p>
-            Water distribution is a critical infrastructure in any city. Without proper optimization, water loss due to inefficient routing, leaks, and high energy consumption can lead to resource wastage and increased costs. Ensuring an efficient distribution system improves water availability, reduces costs, and supports sustainable urban development.
-        </p>
-        <h3 style="color: #00bfff;">What Happens When it is Solved?</h3>
-        <p>
-            Solving the problem leads to several key benefits:
-        </p>
-        <ul>
-            <li><strong>Reduced Operational Costs</strong>: Optimized routing minimizes the length of pipelines and the energy required for pumping water.</li>
-            <li><strong>Lower Water Loss</strong>: Efficient paths reduce leak-prone areas, leading to less wastage.</li>
-            <li><strong>Improved Water Availability</strong>: Faster and more reliable water delivery ensures that all parts of the city receive adequate supply.</li>
-            <li><strong>Sustainability</strong>: Enhancing water distribution efficiency contributes to long-term sustainability and environmental conservation.</li>
-        </ul>
+    <main class="main-content">
+        <div id="home" class="section active">
+            <h3 class="algorithm-title">ALGORITHMIC SOLUTIONS</h3>
+            <h1 class="main-heading">Finding <span>Shortest Path</span><br/>for Water Flow</h1>
+            <p class="subtitle">Optimizing water distribution networks using Dijkstra's Algorithm to ensure efficient and cost-effective flow management.</p>
+        </div>
+
+        <section id="about">
+            <div class="profile-section">
+                <img src="/api/placeholder/150/150" alt="Profile" class="profile-img">
+                <h2 class="profile-name">Mohammed Abdul Raqeeb</h2>
+                <p class="profile-info">Roll No: 207 DIV: G</p>
+                <p class="profile-info">Computer Science Student | Android Developer</p>
+                <p class="profile-info">Passionate about using algorithms to solve real-world problems and creating efficient solutions for complex challenges in urban infrastructure.</p>
+            </div>
         </section>
 
-    <section id="algorithm" style="display: none;">
-        <h2>Algorithm Chosen: Dijkstra's Algorithm</h2>
-        <p>
-            Dijkstra's Algorithm is a well-known graph traversal algorithm used to find the shortest path from a source node to all other nodes in a weighted graph with non-negative edge weights. It is widely applied in scenarios where efficiency and accuracy are critical, such as network routing and urban planning.
-        </p>
-        <h3 style="color: #00bfff;">Why Dijkstra's Algorithm?</h3>
-        <p>
-            Dijkstra's Algorithm is chosen over other algorithms because:
-        </p>
-        <ul>
-            <li><strong>Efficiency</strong>: Dijkstra's algorithm has a time complexity of O((V + E) log V) using a binary heap, making it suitable for large, sparse graphs.</li>
-            <li><strong>Guaranteed Optimal Solution</strong>: It always finds the shortest path in graphs with non-negative edge weights.</li>
-            <li><strong>Simplicity</strong>: Compared to other algorithms like A* and Bellman-Ford, Dijkstra's algorithm is relatively easier to implement and understand.</li>
-        </ul>
-        <h3 style="color: #00bfff;">Comparison with Bellman-Ford</h3>
-        <p>
-            While the Bellman-Ford algorithm can handle graphs with negative edge weights, it has a higher time complexity of O(VE), making it less efficient for large graphs. Since water distribution networks do not involve negative edge weights, Dijkstra's algorithm is a more appropriate choice.
-        </p>
-        <h3 style="color: #00bfff;">Time and Space Complexity</h3>
-        <p>
-            <strong>Time Complexity</strong>: O((V + E) log V), where V is the number of vertices and E is the number of edges. This complexity is achieved using a binary heap for the priority queue.
-        </p>
-        <p>
-            <strong>Space Complexity</strong>: O(V + E), as we need to store the graph (adjacency list) and the distance table.
-        </p>
-    </section>
+        <section id="problem">
+            <h2>Problem Statement</h2>
+            <p>
+                Efficiently routing water from a source to various destinations in an urban area to minimize cost, energy consumption, and water loss. The goal is to determine the shortest path in a complex pipeline network, represented as a graph with nodes (junctions) and edges (pipelines with weights representing distance or cost).
+            </p>
+            
+            <h3>Why is it Important?</h3>
+            <p>
+                Water distribution is a critical infrastructure in any city. Without proper optimization, water loss due to inefficient routing, leaks, and high energy consumption can lead to resource wastage and increased costs. Ensuring an efficient distribution system improves water availability, reduces costs, and supports sustainable urban development.
+            </p>
+            
+            <h3>What Happens When it is Solved?</h3>
+            <p>
+                Solving the problem leads to several key benefits:
+            </p>
+            <ul>
+                <li><strong>Reduced Operational Costs</strong>: Optimized routing minimizes the length of pipelines and the energy required for pumping water.</li>
+                <li><strong>Lower Water Loss</strong>: Efficient paths reduce leak-prone areas, leading to less wastage.</li>
+                <li><strong>Improved Water Availability</strong>: Faster and more reliable water delivery ensures that all parts of the city receive adequate supply.</li>
+                <li><strong>Sustainability</strong>: Enhancing water distribution efficiency contributes to long-term sustainability and environmental conservation.</li>
+            </ul>
+        </section>
 
-    <section id="algorithm" style="display: none;">
-        <h2 style="color: #00bfff;">Algorithm Explanation</h2>
-        <p>
-            Dijkstra's Algorithm is a graph-based algorithm used to find the shortest path from a source node to all other nodes in a weighted graph. It involves the following steps:
-        </p>
-        <ol>
-            <li><strong>Initialization</strong>: Set the distance of the source node to 0 and all other nodes to infinity.</li>
-            <li><strong>Find Minimum Distance</strong>: Select the node with the smallest distance that hasn't been processed yet.</li>
-            <li><strong>Update Distances</strong>: For each unvisited neighbor, calculate the new tentative distance (current distance + edge weight). If this distance is smaller, update it.</li>
-            <li><strong>Repeat</strong>: Continue the process until all nodes have been processed.</li>
-        </ol>
-    </section>
+        <section id="algorithm">
+            <h2>Algorithm Chosen: Dijkstra's Algorithm</h2>
+            <p>
+                Dijkstra's Algorithm is a well-known graph traversal algorithm used to find the shortest path from a source node to all other nodes in a weighted graph. In our water distribution network, it helps determine the most efficient routes for water flow, considering factors like distance and infrastructure costs.
+            </p>
+            
+            <h3>Why Dijkstra's Algorithm?</h3>
+            <ul>
+                <li><strong>Optimal Solution</strong>: Guarantees the shortest path in weighted graphs with non-negative costs, perfect for water distribution networks where costs are always positive.</li>
+                <li><strong>Efficiency</strong>: Performs well with a time complexity of O((V + E) log V), making it suitable for large urban networks.</li>
+                <li><strong>Versatility</strong>: Can handle various cost metrics (distance, pipe diameter, pressure loss) by adjusting edge weights.</li>
+                <li><strong>Reliability</strong>: Widely tested and proven in real-world network optimization problems.</li>
+            </ul>
 
-    <section id="code" style="display: none;">
-        <h2>Code Implementation</h2>
-        <pre>
-<code>
-#include &lt;iostream&gt;
+            <h3>Algorithm Steps</h3>
+            <ol>
+                <li><strong>Initialization</strong>: Set distance to source = 0, all other nodes = infinity</li>
+                <li><strong>Selection</strong>: Choose unvisited node with minimum distance</li>
+                <li><strong>Relaxation</strong>: Update distances to all unvisited neighbors</li>
+                <li><strong>Iteration</strong>: Repeat steps 2-3 until all nodes are visited</li>
+            </ol>
+
+            <h3>Time and Space Complexity</h3>
+            <ul>
+                <li><strong>Time Complexity</strong>: O((V + E) log V), where V = number of junctions, E = number of pipes</li>
+                <li><strong>Space Complexity</strong>: O(V), for storing distances and visited nodes</li>
+            </ul>
+        </section>
+
+        <section id="code">
+            <h2>Code Implementation</h2>
+            <pre><code>#include &lt;iostream&gt;
 #include &lt;vector&gt;
 #include &lt;queue&gt;
 #include &lt;limits.h&gt;
@@ -173,43 +319,60 @@ void dijkstra(vector<vector<pair<int, int>>> &graph, int src) {
         }
     }
 
-    cout << "Shortest distances from source node " << src << ":
-";
+    cout << "Shortest distances from source node " << src << ":\n";
     for (int i = 0; i < n; i++) {
-        cout << "To node " << i << " : " << dist[i] << "
-";
+        cout << "To node " << i << " : " << dist[i] << "\n";
     }
 }
 
 int main() {
+    // Example water distribution network
     vector<vector<pair<int, int>>> graph = {
-        {{1, 4}, {2, 1}},       // Node 0 connections: (1, 4), (2, 1)
-        {{3, 1}},                // Node 1 connections: (3, 1)
-        {{1, 2}, {3, 5}},        // Node 2 connections: (1, 2), (3, 5)
-        {}                       // Node 3 connections: No outgoing edges
+        {{1, 4}, {2, 1}},       // Node 0 (Source) connections
+        {{3, 1}},               // Node 1 connections
+        {{1, 2}, {3, 5}},       // Node 2 connections
+        {}                      // Node 3 (Destination) connections
     };
 
-    int source = 0;
+    int source = 0;  // Source water distribution point
     dijkstra(graph, source);
 
     return 0;
-}
-</code>
-        </pre>
-    </section>
-
-    <footer>
-        <p>&copy; 2025 Dijkstra's Algorithm Project | Water Distribution Optimization</p>
-    </footer>
+}</code></pre>
+            <h3>Code Explanation</h3>
+            <p>
+                The implementation uses an adjacency list representation where each node stores its neighbors and the corresponding edge weights (distances/costs). The priority queue ensures we always process the node with the minimum current distance first, maintaining optimality.
+            </p>
+        </section>
+    </main>
 
     <script>
-        function showSection(sectionId) {
-            const sections = document.querySelectorAll('section');
-            sections.forEach(section => section.style.display = 'none');
-            document.getElementById(sectionId).style.display = 'block';
-        }
-    </script>
+        // Navigation functionality
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                // Remove active class from all links
+                document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+                // Add active class to clicked link
+                link.classList.add('active');
+                
+                // Hide all sections
+                document.querySelectorAll('section').forEach(section => {
+                    section.style.display = 'none';
+                });
+                document.getElementById('home').style.display = 'none';
+                
+                // Show selected section
+                const targetId = link.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                if (targetSection) {
+                    targetSection.style.display = 'block';
+                }
+            });
+        });
 
+        // Show About section by default
+        document.getElementById('about').style.display = 'block';
+    </script>
 </body>
 </html>
-
