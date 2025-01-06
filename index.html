@@ -68,7 +68,10 @@
 <body>
 
     <header>
-        <h1 style="font-family: 'Comfortaa', cursive; font-weight: 700; font-size: 2.5em; color: #fff;">DIJKSTRA'S ALGORITHM FOR WATER DISTRIBUTION</h1>
+        <h1 style="font-family: 'Georgia', serif; font-weight: bold; text-align: center; color: #fff;">
+    <span style="font-size: 2.5em; display: block;">FINDING SHORTEST PATH</span>
+    <span style="font-size: 1.8em; display: block;">FOR WATER FLOW</span>
+</h1>
     </header>
 
     <nav>
@@ -103,7 +106,7 @@
         <p>
             Dijkstra's Algorithm is a well-known graph traversal algorithm used to find the shortest path from a source node to all other nodes in a weighted graph with non-negative edge weights. It is widely applied in scenarios where efficiency and accuracy are critical, such as network routing and urban planning.
         </p>
-        <h3>Why Dijkstra's Algorithm?</h3>
+        <h3 style="color: #00bfff;">Why Dijkstra's Algorithm?</h3>
         <p>
             Dijkstra's Algorithm is chosen over other algorithms because:
         </p>
@@ -112,11 +115,11 @@
             <li><strong>Guaranteed Optimal Solution</strong>: It always finds the shortest path in graphs with non-negative edge weights.</li>
             <li><strong>Simplicity</strong>: Compared to other algorithms like A* and Bellman-Ford, Dijkstra's algorithm is relatively easier to implement and understand.</li>
         </ul>
-        <h3>Comparison with Bellman-Ford</h3>
+        <h3 style="color: #00bfff;">Comparison with Bellman-Ford</h3>
         <p>
             While the Bellman-Ford algorithm can handle graphs with negative edge weights, it has a higher time complexity of O(VE), making it less efficient for large graphs. Since water distribution networks do not involve negative edge weights, Dijkstra's algorithm is a more appropriate choice.
         </p>
-        <h3>Time and Space Complexity</h3>
+        <h3 style="color: #00bfff;">Time and Space Complexity</h3>
         <p>
             <strong>Time Complexity</strong>: O((V + E) log V), where V is the number of vertices and E is the number of edges. This complexity is achieved using a binary heap for the priority queue.
         </p>
@@ -126,7 +129,7 @@
     </section>
 
     <section id="algorithm" style="display: none;">
-        <h2>Algorithm Explanation</h2>
+        <h2 style="color: #00bfff;">Algorithm Explanation</h2>
         <p>
             Dijkstra's Algorithm is a graph-based algorithm used to find the shortest path from a source node to all other nodes in a weighted graph. It involves the following steps:
         </p>
