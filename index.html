@@ -348,6 +348,157 @@ int main() {
 
     return 0;
 }</code></pre>
+
+        <h2>Code Example</h2>
+        <pre>
+            <code>
+                #include <iostream>
+#include <vector>
+#include <queue>
+#include <limits.h>
+#include <string>
+#include <iomanip>
+#include <algorithm>  // Added this header for reverse()
+
+using namespace std;
+
+// Structure to represent a city area/node
+struct Area {
+    string name;
+    int id;
+    Area(string n, int i) : name(n), id(i) {}
+};
+
+// Structure to store the path information
+struct PathInfo {
+    vector<int> path;
+    int distance;
+};
+
+class WaterNetwork {
+private:
+    vector<Area> areas;
+    vector<vector<pair<int, int>>> graph;
+    
+public:
+    // Initialize the network with number of areas
+    WaterNetwork(int n) {
+        graph.resize(n);
+    }
+    
+    // Add an area to the network
+    void addArea(string name, int id) {
+        areas.push_back(Area(name, id));
+    }
+    
+    // Add a connection (pipe) between two areas
+    void addPipe(int from, int to, int distance) {
+        graph[from].push_back({to, distance});
+        graph[to].push_back({from, distance}); // Assuming bidirectional pipes
+    }
+    
+    // Find shortest path using Dijkstra's algorithm
+    PathInfo findShortestPath(int source, int destination) {
+        int n = graph.size();
+        vector<int> dist(n, INT_MAX);
+        vector<int> prev(n, -1);
+        dist[source] = 0;
+        
+        // Priority queue to store {distance, node}
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+        pq.push({0, source});
+        
+        while (!pq.empty()) {
+            int u = pq.top().second;
+            int d = pq.top().first;
+            pq.pop();
+            
+            if (d > dist[u]) continue;
+            
+            for (auto& neighbor : graph[u]) {
+                int v = neighbor.first;
+                int weight = neighbor.second;
+                
+                if (dist[u] + weight < dist[v]) {
+                    dist[v] = dist[u] + weight;
+                    prev[v] = u;
+                    pq.push({dist[v], v});
+                }
+            }
+        }
+        
+        // Reconstruct path
+        PathInfo result;
+        result.distance = dist[destination];
+        
+        if (dist[destination] == INT_MAX) {
+            return result; // No path exists
+        }
+        
+        // Build the path from destination to source
+        int current = destination;
+        while (current != -1) {
+            result.path.push_back(current);
+            current = prev[current];
+        }
+        
+        // Reverse path to get source to destination
+        reverse(result.path.begin(), result.path.end());
+        return result;
+    }
+    
+    // Print the path with area names
+    void printPath(const PathInfo& pathInfo) {
+        if (pathInfo.path.empty()) {
+            cout << "No path exists between these areas!" << endl;
+            return;
+        }
+        
+        cout << "\nOptimal Water Flow Path:" << endl;
+        cout << "------------------------" << endl;
+        cout << "Total Distance: " << pathInfo.distance << " meters" << endl;
+        cout << "Path: ";
+        
+        for (int i = 0; i < pathInfo.path.size(); i++) {
+            cout << areas[pathInfo.path[i]].name;
+            if (i < pathInfo.path.size() - 1) {
+                cout << " -> ";
+            }
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    // Create a network with 6 areas
+    WaterNetwork cityNetwork(6);
+    
+    // Add areas
+    cityNetwork.addArea("Water Plant", 0);
+    cityNetwork.addArea("Residential Zone A", 1);
+    cityNetwork.addArea("Commercial District", 2);
+    cityNetwork.addArea("Industrial Park", 3);
+    cityNetwork.addArea("Residential Zone B", 4);
+    cityNetwork.addArea("City Center", 5);
+    
+    // Add pipes with distances in meters
+    cityNetwork.addPipe(0, 1, 500);  // Water Plant to Residential Zone A
+    cityNetwork.addPipe(0, 2, 800);  // Water Plant to Commercial District
+    cityNetwork.addPipe(1, 2, 300);  // Residential Zone A to Commercial District
+    cityNetwork.addPipe(1, 4, 600);  // Residential Zone A to Residential Zone B
+    cityNetwork.addPipe(2, 3, 400);  // Commercial District to Industrial Park
+    cityNetwork.addPipe(2, 5, 700);  // Commercial District to City Center
+    cityNetwork.addPipe(3, 5, 500);  // Industrial Park to City Center
+    cityNetwork.addPipe(4, 5, 400);  // Residential Zone B to City Center
+    
+    // Find and print shortest path from Water Plant to City Center
+    PathInfo shortestPath = cityNetwork.findShortestPath(0, 5);
+    cityNetwork.printPath(shortestPath);
+    
+    return 0;
+}
+            </code>
+        </pre>
             <h3>Code Explanation</h3>
             <p>
                 The implementation uses an adjacency list representation where each node stores its neighbors and the corresponding edge weights (distances/costs). The priority queue ensures we always process the node with the minimum current distance first, maintaining optimality.
