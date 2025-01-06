@@ -65,7 +65,7 @@
 <body>
 
     <header>
-        <h1>Dijkstra's Algorithm for Water Distribution</h1>
+        <h1 style="font-family: 'Impact', sans-serif; font-size: 2.5em; color: #00bfff;">DIJKSTRA'S ALGORITHM FOR WATER DISTRIBUTION</h1>
     </header>
 
     <nav>
@@ -79,11 +79,11 @@
         <p>
             Efficiently routing water from a source to various destinations in an urban area to minimize cost, energy consumption, and water loss. The goal is to determine the shortest path in a complex pipeline network, represented as a graph with nodes (junctions) and edges (pipelines with weights representing distance or cost).
         </p>
-        <h3>Why is it Important?</h3>
+        <h3 style="color: #00bfff;">Why is it Important?</h3>
         <p>
             Water distribution is a critical infrastructure in any city. Without proper optimization, water loss due to inefficient routing, leaks, and high energy consumption can lead to resource wastage and increased costs. Ensuring an efficient distribution system improves water availability, reduces costs, and supports sustainable urban development.
         </p>
-        <h3>What Happens When it is Solved?</h3>
+        <h3 style="color: #00bfff;">What Happens When it is Solved?</h3>
         <p>
             Solving the problem leads to several key benefits:
         </p>
@@ -93,7 +93,10 @@
             <li><strong>Improved Water Availability</strong>: Faster and more reliable water delivery ensures that all parts of the city receive adequate supply.</li>
             <li><strong>Sustainability</strong>: Enhancing water distribution efficiency contributes to long-term sustainability and environmental conservation.</li>
         </ul>
-        <h2 style="color: #00bfff;">Algorithm Chosen: Dijkstra's Algorithm</h2>
+        </section>
+
+    <section id="algorithm" style="display: none;">
+        <h2>Algorithm Chosen: Dijkstra's Algorithm</h2>
         <p>
             Dijkstra's Algorithm is a well-known graph traversal algorithm used to find the shortest path from a source node to all other nodes in a weighted graph with non-negative edge weights. It is widely applied in scenarios where efficiency and accuracy are critical, such as network routing and urban planning.
         </p>
@@ -110,7 +113,14 @@
         <p>
             While the Bellman-Ford algorithm can handle graphs with negative edge weights, it has a higher time complexity of O(VE), making it less efficient for large graphs. Since water distribution networks do not involve negative edge weights, Dijkstra's algorithm is a more appropriate choice.
         </p>
-        </section>
+        <h3>Time and Space Complexity</h3>
+        <p>
+            <strong>Time Complexity</strong>: O((V + E) log V), where V is the number of vertices and E is the number of edges. This complexity is achieved using a binary heap for the priority queue.
+        </p>
+        <p>
+            <strong>Space Complexity</strong>: O(V + E), as we need to store the graph (adjacency list) and the distance table.
+        </p>
+    </section>
 
     <section id="algorithm" style="display: none;">
         <h2>Algorithm Explanation</h2>
