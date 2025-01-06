@@ -3,157 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Dijkstra's Algorithm for Water Distribution - A Creative Web Presentation">
-    <title>Dijkstra's Algorithm - Water Flow Optimization</title>
+    <title>Dijkstra's Algorithm for Water Distribution</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            background-color: #f4f7f9;
+            background-color: #f9f9f9;
             color: #333;
         }
-
         header {
-            background-color: #007bff;
+            background-color: #4CAF50;
             color: white;
-            padding: 20px;
+            padding: 1em 0;
             text-align: center;
         }
-
-        .container {
+        section {
+            padding: 2em;
+            margin: 1em auto;
             max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-
-        .box {
-            padding: 20px;
-            background: linear-gradient(145deg, #ffffff, #d9e4ec);
-            box-shadow: 5px 5px 15px #bababa, -5px -5px 15px #ffffff;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            transition: transform 0.3s ease;
-        }
-
-        .box:hover {
-            transform: scale(1.02);
-        }
-
-        .box h2 {
-            color: #007bff;
-            margin-bottom: 10px;
-        }
-
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-            margin-top: 20px;
-        }
-
-        #backToTop {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
+        h2 {
+            color: #4CAF50;
         }
     </style>
 </head>
 <body>
-
     <header>
         <h1>Dijkstra's Algorithm for Water Distribution</h1>
     </header>
-
-    <div class="container">
-        <!-- Problem Statement Box -->
-        <div class="box">
-            <h2>Problem Statement</h2>
-            <p>
-                Efficiently routing water from a source to various destinations in an urban area to minimize cost, energy consumption, and water loss. The goal is to determine the shortest path in a complex pipeline network, represented as a graph with nodes (junctions) and edges (pipelines with weights representing distance or cost).
-            </p>
-        </div>
-
-        <!-- Introduction Box -->
-        <div class="box">
-            <h2>Introduction</h2>
-            <p>
-                In urban environments, efficient water distribution is essential for ensuring the availability of clean water to all residential, commercial, and industrial areas. Water is a fundamental resource, and its equitable distribution is critical for maintaining public health, supporting economic activities, and improving the overall quality of life. However, distributing water efficiently presents several challenges, including water loss, high operational costs, and aging infrastructure.
-
-This project focuses on designing a sustainable water distribution system by applying suitable algorithms and addressing common issues faced in real-world urban water networks.
-
-               <br> Dijkstra's Algorithm is a graph-based algorithm used to find the shortest path from a source node to all other nodes in a weighted graph. It was proposed by Edsger W. Dijkstra in 1956 and has since been widely used in various applications such as GPS navigation, network routing, and urban planning.
-            </p>
-        </div>
-
-        <!-- Why Dijkstra Box -->
-        <div class="box">
-            <h2>Why Dijkstra?</h2>
-            <p>
-                Dijkstra's algorithm guarantees the shortest path, is faster than Bellman-Ford for graphs without negative weights, and is simple to implement. It is widely used in GPS, networking, and water flow optimization. Compared to other algorithms like Bellman-Ford and Floyd-Warshall, it is more efficient for sparse graphs with non-negative edge weights.
-            </p>
-        </div>
-
-        <!-- Key Inefficiencies Box -->
-        <div class="box">
-            <h2>Key Inefficiencies in Previous Approaches</h2>
-            <p>
-                Manual routing methods were error-prone and time-consuming. Greedy heuristics often failed to provide optimal solutions, resulting in higher costs and increased water loss. Additionally, previous approaches lacked scalability, making them impractical for large urban networks.
-            </p>
-        </div>
-
-        <!-- How it Works Box -->
-        <div class="box">
-            <h2>How It Works</h2>
-            <p>
-                1. **Initialization**: Set the distance of the source node to 0 and all other nodes to infinity.<br>
-                2. **Find Minimum Distance**: Select the node with the smallest distance that hasn't been processed yet.<br>
-                3. **Update Distances**: For each unvisited neighbor, calculate the new tentative distance (current distance + edge weight). If this distance is smaller, update it.<br>
-                4. **Repeat**: Continue the process until all nodes have been processed.
-            </p>
-        </div>
-
-        <!-- Time & Space Complexity Box -->
-        <div class="box">
-            <h2>Time & Space Complexity</h2>
-            <p>
-                - **Time Complexity**: O((V + E) log V), where V is the number of vertices and E is the number of edges. This complexity is achieved using a binary heap for the priority queue.<br>
-                - **Space Complexity**: O(V + E), as we need to store the graph (adjacency list) and the distance table.
-            </p>
-        </div>
-    </div>
-
-    <button id="backToTop" onclick="scrollToTop()">Back to Top</button>
-
-    <footer>
-        <p>&copy; 2025 Dijkstra's Algorithm Project | Water Distribution Optimization</p>
-    </footer>
-
-    <script>
-        // Back to Top Button
-        window.onscroll = function() {
-            const backToTop = document.getElementById('backToTop');
-            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-                backToTop.style.display = 'block';
-            } else {
-                backToTop.style.display = 'none';
-            }
-        };
-
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    </script>
-
+    <section>
+        <h2>Introduction</h2>
+        <p>Overview of Dijkstra's Algorithm and its application in water distribution.</p>
+    </section>
+    <!-- Add more sections as needed -->
 </body>
 </html>
-
