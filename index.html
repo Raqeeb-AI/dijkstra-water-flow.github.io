@@ -28,18 +28,21 @@
         }
 
         nav button {
-            background-color: #00bfff;
+            background: linear-gradient(145deg, #007bff, #005f99);
             color: white;
             border: none;
             padding: 10px 20px;
             margin: 0 10px;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
             font-size: 16px;
+            box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, background-color 0.3s;
         }
 
         nav button:hover {
-            background-color: #005f99;
+            background-color: #00bfff;
+            transform: scale(1.1);
         }
 
         section {
@@ -65,7 +68,7 @@
 <body>
 
     <header>
-        <h1 style="font-family: 'Impact', sans-serif; font-size: 2.5em; color: #00bfff;">DIJKSTRA'S ALGORITHM FOR WATER DISTRIBUTION</h1>
+        <h1 style="font-family: 'Comfortaa', cursive; font-weight: 700; font-size: 2.5em; color: #fff;">DIJKSTRA'S ALGORITHM FOR WATER DISTRIBUTION</h1>
     </header>
 
     <nav>
@@ -167,9 +170,26 @@ void dijkstra(vector<vector<pair<int, int>>> &graph, int src) {
         }
     }
 
+    cout << "Shortest distances from source node " << src << ":
+";
     for (int i = 0; i < n; i++) {
-        cout &lt;&lt; "Distance from " &lt;&lt; src &lt;&lt; " to " &lt;&lt; i &lt;&lt; " is " &lt;&lt; dist[i] &lt;&lt; endl;
+        cout << "To node " << i << " : " << dist[i] << "
+";
     }
+}
+
+int main() {
+    vector<vector<pair<int, int>>> graph = {
+        {{1, 4}, {2, 1}},       // Node 0 connections: (1, 4), (2, 1)
+        {{3, 1}},                // Node 1 connections: (3, 1)
+        {{1, 2}, {3, 5}},        // Node 2 connections: (1, 2), (3, 5)
+        {}                       // Node 3 connections: No outgoing edges
+    };
+
+    int source = 0;
+    dijkstra(graph, source);
+
+    return 0;
 }
 </code>
         </pre>
