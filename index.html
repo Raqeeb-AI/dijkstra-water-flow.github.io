@@ -22,28 +22,35 @@
             text-align: center;
         }
 
-        .container {
+        nav {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        nav button {
+            background-color: #00bfff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        nav button:hover {
+            background-color: #005f99;
+        }
+
+        section {
             max-width: 800px;
             margin: 20px auto;
             padding: 20px;
+            line-height: 1.6;
         }
 
-        .box {
-            padding: 20px;
-            background: linear-gradient(145deg, #1a1a1a, #333);
-            box-shadow: 5px 5px 15px #000000, -5px -5px 15px #333333;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            transition: transform 0.3s ease;
-        }
-
-        .box:hover {
-            transform: scale(1.02);
-        }
-
-        .box h2 {
+        section h2 {
             color: #00bfff;
-            margin-bottom: 10px;
         }
 
         footer {
@@ -53,19 +60,6 @@
             padding: 10px 0;
             margin-top: 20px;
         }
-
-        #backToTop {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #00bfff;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
@@ -74,79 +68,81 @@
         <h1>Dijkstra's Algorithm for Water Distribution</h1>
     </header>
 
-    <div class="container">
-        <!-- Problem Statement Box -->
-        <div class="box">
-            <h2>Problem Statement</h2>
-            <p>
-                Efficiently routing water from a source to various destinations in an urban area to minimize cost, energy consumption, and water loss. The goal is to determine the shortest path in a complex pipeline network, represented as a graph with nodes (junctions) and edges (pipelines with weights representing distance or cost).
-            </p>
-        </div>
+    <nav>
+        <button onclick="showSection('problem')">Problem</button>
+        <button onclick="showSection('algorithm')">Algorithm</button>
+        <button onclick="showSection('code')">Code</button>
+    </nav>
 
-        <!-- Introduction Box -->
-        <div class="box">
-            <h2>Introduction</h2>
-            <p>
-                Dijkstra's Algorithm is a graph-based algorithm used to find the shortest path from a source node to all other nodes in a weighted graph. It was proposed by Edsger W. Dijkstra in 1956 and has since been widely used in various applications such as GPS navigation, network routing, and urban planning.
-            </p>
-        </div>
+    <section id="problem">
+        <h2>Problem Statement</h2>
+        <p>
+            Efficiently routing water from a source to various destinations in an urban area to minimize cost, energy consumption, and water loss. The goal is to determine the shortest path in a complex pipeline network, represented as a graph with nodes (junctions) and edges (pipelines with weights representing distance or cost).
+        </p>
+    </section>
 
-        <!-- Why Dijkstra Box -->
-        <div class="box">
-            <h2>Why Dijkstra?</h2>
-            <p>
-                Dijkstra's algorithm guarantees the shortest path, is faster than Bellman-Ford for graphs without negative weights, and is simple to implement. It is widely used in GPS, networking, and water flow optimization. Compared to other algorithms like Bellman-Ford and Floyd-Warshall, it is more efficient for sparse graphs with non-negative edge weights.
-            </p>
-        </div>
+    <section id="algorithm" style="display: none;">
+        <h2>Algorithm Explanation</h2>
+        <p>
+            Dijkstra's Algorithm is a graph-based algorithm used to find the shortest path from a source node to all other nodes in a weighted graph. It involves the following steps:
+        </p>
+        <ol>
+            <li><strong>Initialization</strong>: Set the distance of the source node to 0 and all other nodes to infinity.</li>
+            <li><strong>Find Minimum Distance</strong>: Select the node with the smallest distance that hasn't been processed yet.</li>
+            <li><strong>Update Distances</strong>: For each unvisited neighbor, calculate the new tentative distance (current distance + edge weight). If this distance is smaller, update it.</li>
+            <li><strong>Repeat</strong>: Continue the process until all nodes have been processed.</li>
+        </ol>
+    </section>
 
-        <!-- Key Inefficiencies Box -->
-        <div class="box">
-            <h2>Key Inefficiencies in Previous Approaches</h2>
-            <p>
-                Manual routing methods were error-prone and time-consuming. Greedy heuristics often failed to provide optimal solutions, resulting in higher costs and increased water loss. Additionally, previous approaches lacked scalability, making them impractical for large urban networks.
-            </p>
-        </div>
+    <section id="code" style="display: none;">
+        <h2>Code Implementation</h2>
+        <pre>
+<code>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;queue&gt;
+#include &lt;limits.h&gt;
 
-        <!-- How it Works Box -->
-        <div class="box">
-            <h2>How It Works</h2>
-            <p>
-                1. <strong>Initialization</strong>: Set the distance of the source node to 0 and all other nodes to infinity.<br>
-                2. <strong>Find Minimum Distance</strong>: Select the node with the smallest distance that hasn't been processed yet.<br>
-                3. <strong>Update Distances</strong>: For each unvisited neighbor, calculate the new tentative distance (current distance + edge weight). If this distance is smaller, update it.<br>
-                4. <strong>Repeat</strong>: Continue the process until all nodes have been processed.
-            </p>
-        </div>
+using namespace std;
 
-        <!-- Time & Space Complexity Box -->
-        <div class="box">
-            <h2>Time & Space Complexity</h2>
-            <p>
-                - <strong>Time Complexity</strong>: O((V + E) log V), where V is the number of vertices and E is the number of edges. This complexity is achieved using a binary heap for the priority queue.<br>
-                - <strong>Space Complexity</strong>: O(V + E), as we need to store the graph (adjacency list) and the distance table.
-            </p>
-        </div>
-    </div>
+void dijkstra(vector<vector<pair<int, int>>> &graph, int src) {
+    int n = graph.size();
+    vector<int> dist(n, INT_MAX);
+    dist[src] = 0;
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+    pq.push({0, src});
 
-    <button id="backToTop" onclick="scrollToTop()">Back to Top</button>
+    while (!pq.empty()) {
+        int u = pq.top().second;
+        pq.pop();
+
+        for (auto &neighbor : graph[u]) {
+            int v = neighbor.first;
+            int weight = neighbor.second;
+            if (dist[u] + weight < dist[v]) {
+                dist[v] = dist[u] + weight;
+                pq.push({dist[v], v});
+            }
+        }
+    }
+
+    for (int i = 0; i < n; i++) {
+        cout &lt;&lt; "Distance from " &lt;&lt; src &lt;&lt; " to " &lt;&lt; i &lt;&lt; " is " &lt;&lt; dist[i] &lt;&lt; endl;
+    }
+}
+</code>
+        </pre>
+    </section>
 
     <footer>
         <p>&copy; 2025 Dijkstra's Algorithm Project | Water Distribution Optimization</p>
     </footer>
 
     <script>
-        // Back to Top Button
-        window.onscroll = function() {
-            const backToTop = document.getElementById('backToTop');
-            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-                backToTop.style.display = 'block';
-            } else {
-                backToTop.style.display = 'none';
-            }
-        };
-
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => section.style.display = 'none');
+            document.getElementById(sectionId).style.display = 'block';
         }
     </script>
 
